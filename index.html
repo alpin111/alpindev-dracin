@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nonton Dracin · simpel keren</title>
+  <!-- Font Awesome 6 (free) untuk icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: #0b0b0f;
+      background-image: radial-gradient(circle at 30% 10%, rgba(45, 0, 80, 0.4) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(0, 200, 255, 0.08) 0%, transparent 50%);
+      min-height: 100vh;
+      color: #f0f0f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .player-card {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(18, 20, 28, 0.75);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(80, 90, 120, 0.25);
+      border-radius: 3rem;
+      padding: 2rem 2rem 2.5rem 2rem;
+      box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(160, 190, 255, 0.1) inset;
+      transition: all 0.2s ease;
+    }
+
+    /* header / navbar mini */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo i {
+      background: linear-gradient(145deg, #b0a0ff, #5f8cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 8px #6070ff80);
+    }
+
+    .logo span {
+      background: linear-gradient(145deg, #f0eaff, #cad3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.2rem;
+      color: #a0b0d0;
+      font-size: 1.3rem;
+    }
+
+    .nav-icons i {
+      cursor: default;
+      transition: 0.2s;
+      padding: 0.4rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .nav-icons i:hover {
+      color: white;
+      text-shadow: 0 0 12px #8a9cff;
+    }
+
+    /* judul section */
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 1.8rem 0 1.2rem 0;
+    }
+
+    .section-title h2 {
+      font-weight: 500;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      border-left: 5px solid #6c5dd3;
+      padding-left: 1rem;
+      background: linear-gradient(to right, #ffffff, #c0caf0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-title a {
+      color: #8895c0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      border-bottom: 1px dashed #334155;
+      padding-bottom: 2px;
+      transition: 0.2s;
+    }
+
+    .section-title a:hover {
+      color: #b2baff;
+      border-bottom-color: #6c5dd3;
+    }
+
+    /* highlight / main player */
+    .featured {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .video-preview {
+      flex: 2 1 500px;
+      background: #0f1117;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid #2e3440;
+      box-shadow: 0 20px 35px -15px black;
+      transition: 0.3s;
+    }
+
+    .video-thumb {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background: linear-gradient(145deg, #1d1f2b, #0a0c14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-thumb img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: 0.4s;
+    }
+
+    .play-button {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: rgba(20, 30, 50, 0.7);
+      backdrop-filter: blur(8px);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.2rem;
+      transition: 0.2s;
+      cursor: default;
+      box-shadow: 0 0 30px #3f5fef;
+    }
+
+    .play-button i {
+      margin-left: 6px; /* sedikit offset karena icon play */
+    }
+
+    .play-button:hover {
+      background: #4f3ee0;
+      border-color: #aabfff;
+      transform: scale(1.05);
+    }
+
+    .video-info {
+      padding: 1.2rem 1.5rem;
+      background: #0d0f15;
+      border-top: 1px solid #262c36;
+    }
+
+    .video-info h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge {
+      background: #2f3e5a;
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: #bbd9ff;
+      border: 1px solid #4d6180;
+    }
+
+    .video-info p {
+      color: #98a9c9;
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .video-info p i {
+      width: 20px;
+      color: #6075b0;
+    }
+
+    /* daftar episode / rekomendasi grid */
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0 1rem;
+    }
+
+    .episode-item {
+      background: #141823;
+      border-radius: 1.8rem;
+      border: 1px solid #2b3040;
+      overflow: hidden;
+      transition: 0.15s ease;
+      backdrop-filter: blur(5px);
+      cursor: default;
+    }
+
+    .episode-item:hover {
+      border-color: #6173bb;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 20px -12px #1f2b4a, 0 0 0 1px #5065b0 inset;
+    }
+
+    .episode-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #1e2332;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .episode-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+    }
+
+    .episode-duration {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      background: rgba(8, 12, 18, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #bcc7ed;
+      border: 0.5px solid #40507a;
+    }
+
+    .episode-item h4 {
+      padding: 0.7rem 0.8rem 0.2rem 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .episode-meta {
+      padding: 0 0.8rem 0.8rem 0.8rem;
+      font-size: 0.75rem;
+      color: #7f8bb3;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* bar bawah (info kecil) */
+    .bottom-bar {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #262e40;
+      color: #7280a8;
+      font-size: 0.9rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .tags span {
+      background: #1d2436;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #323c54;
+      font-size: 0.8rem;
+    }
+
+    .social i {
+      margin-left: 1rem;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      transition: 0.2s;
+    }
+
+    .social i:hover {
+      opacity: 1;
+      color: #b1c2ff;
+    }
+
+    /* responsif touch */
+    @media (max-width: 550px) {
+      .player-card {
+        padding: 1.5rem;
+        border-radius: 2rem;
+      }
+      .play-button {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+      }
+    }
+
+    /* gambar dummy / placeholder dari unsplash (gak perlu internet, pakai gradien) */
+    .dummy-thumb {
+      background: linear-gradient(145deg, #2a3150, #151b30);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c86b0;
+      font-size: 2rem;
+    }
+    .dummy-thumb i {
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="player-card">
+
+    <!-- header -->
+    <div class="header">
+      <div class="logo">
+        <i class="fas fa-clapperboard"></i>
+        <span>DRACIN<span style="font-weight:300; margin-left:4px;">.fliX</span></span>
+      </div>
+      <div class="nav-icons">
+        <i class="fas fa-search"></i>
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-user-astronaut"></i>
+      </div>
+    </div>
+
+    <!-- unggulan / sekarang ditonton -->
+    <div class="featured">
+      <div class="video-preview">
+        <div class="video-thumb">
+          <!-- gambar thumb main (dummy gradien + ikon) -->
+          <div class="dummy-thumb">
+            <i class="fas fa-film fa-4x"></i>
+          </div>
+          <div class="play-button">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+        <div class="video-info">
+          <h3>
+            <span>#1 Trending Dracin</span>
+            <span class="badge">EP 12</span>
+          </h3>
+          <p><i class="fas fa-star" style="color: #f5c45e;"></i> 8.9 / 10.0   •  <i class="fas fa-clock"></i> 1h 28m   •  <i class="fas fa-crown"></i> 4K HDR</p>
+          <p style="font-size:0.9rem; color:#b9c4ec;">Lee Do-hyun · Go Min-si · 2025 · mystery</p>
+        </div>
+      </div>
+      <!-- sidebar info bisa ditambah, tapi biar simple gapapa -->
+    </div>
+
+    <!-- judul section episode -->
+    <div class="section-title">
+      <h2><i class="far fa-play-circle" style="margin-right: 8px;"></i> Lanjutin nonton</h2>
+      <a href="#">Lihat semua <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- grid episode -->
+    <div class="episode-grid">
+      <!-- episode 1 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-tv"></i></div>
+          <span class="episode-duration">36:12</span>
+        </div>
+        <h4>Eps 1: Moonlit</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye" style="margin-right: 4px;"></i> 187k</span>
+          <span>🔥 baru</span>
+        </div>
+      </div>
+      <!-- episode 2 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-dragon"></i></div>
+          <span class="episode-duration">42:08</span>
+        </div>
+        <h4>Eps 2: Hierophant</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye"></i> 142k</span>
+          <span>⭐ 9.1</span>
+        </div>
+      </div>
+      <!-- episode 3 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-mask"></i></div>
+          <span class="episode-duration">48:05</span>
+        </div>
+        <h4>Eps 3: The oath</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye"></i> 209k</span>
+          <span>🔥🔥</span>
+        </div>
+      </div>
+      <!-- episode 4 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-ghost"></i></div>
+          <span class="episode-duration">51:22</span>
+        </div>
+        <h4>Eps 4: Crimson</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye"></i> 96k</span>
+          <span>new</span>
+        </div>
+      </div>
+      <!-- episode 5 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-robot"></i></div>
+          <span class="episode-duration">44:17</span>
+        </div>
+        <h4>Eps 5: Signal</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye"></i> 73k</span>
+          <span>🔊</span>
+        </div>
+      </div>
+      <!-- episode 6 -->
+      <div class="episode-item">
+        <div class="episode-thumb">
+          <div class="dummy-thumb"><i class="fas fa-crown"></i></div>
+          <span class="episode-duration">47:59</span>
+        </div>
+        <h4>Eps 6: Royal</h4>
+        <div class="episode-meta">
+          <span><i class="far fa-eye"></i> 112k</span>
+          <span>🌟</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- bar genre / sosial -->
+    <div class="bottom-bar">
+      <div class="tags">
+        <span>#thriller</span>
+        <span>#romance</span>
+        <span>#action</span>
+        <span>#drama korea</span>
+      </div>
+      <div class="social">
+        <i class="fab fa-discord"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fas fa-share-alt"></i>
+      </div>
+    </div>
+
+    <!-- embeded micro footer pesan simple -->
+    <div style="text-align: right; margin-top: 1rem; font-size: 0.75rem; color: #405075; letter-spacing: 0.3px; border-top: 1px dashed #202638; padding-top: 0.8rem;">
+      <i class="fas fa-crown" style="margin-right: 6px;"></i> nonton dracin • simpel keren • all in one 
+    </div>
+  </div>
+</body>
+</html>
